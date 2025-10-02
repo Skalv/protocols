@@ -70,6 +70,9 @@ build: codegen lint
 	rm -f $(BIN_DIR)/wasabi
 	go build -o $(BIN_DIR)/wasabi -v -ldflags \
 		"-X main.rev=$(version) -X main.bts=$(timestamp)" cmd/test/wasabi/main.go
+	rm -f $(BIN_DIR)/winnieswap
+	go build -o $(BIN_DIR)/winnieswap -v -ldflags \
+		"-X main.rev=$(version) -X main.bts=$(timestamp)" cmd/test/winnieswap/main.go
 	go build -o $(BIN_DIR)/webera -v -ldflags \
 		"-X main.rev=$(version) -X main.bts=$(timestamp)" cmd/test/webera/main.go		
 
@@ -108,6 +111,7 @@ codegen:
 	abigen --abi assets/abis/paddlefi.abi --pkg sc --type Paddlefi --out internal/sc/paddlefi.go
 	abigen --abi assets/abis/pendlelpwrapper.abi --pkg sc --type PendleWrapper --out internal/sc/pendle_wrapper.go	
 	abigen --abi assets/abis/solvbtc.abi --pkg sc --type SolvBTC --out internal/sc/solvbtc.go	
-	abigen --abi assets/abis/steerpool.abi --pkg sc --type SteerPool --out internal/sc/steer_pool.go		
+	abigen --abi assets/abis/steerpool.abi --pkg sc --type SteerPool --out internal/sc/steer_pool.go
+	abigen --abi assets/abis/stickyvault.abi --pkg sc --type StickyVault --out internal/sc/sticky_vault.go
 	abigen --abi assets/abis/wasabeevault.abi --pkg sc --type WasabeeVault --out internal/sc/wasabee_vault.go
 	abigen --abi assets/abis/weberavault.abi --pkg sc --type WeberaVault --out internal/sc/webera_vault.go
